@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using PWF.Persistence;
 using PWF.Services.Email;
 using PWF.Services.Settings;
+using PWF.Services.PaymentGateway;
+using PWF.Domain.Models;
 
 namespace PWF.Web.Extension
 {
@@ -17,6 +19,7 @@ namespace PWF.Web.Extension
             .AddEntityFrameworkStores<PWFContext>();
             services.AddScoped<IPWFContext>(provider => provider.GetService<PWFContext>());
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IStripeService, StripeService>();
             services.Configure<EmailSettings>(configuration.GetSection("EMailSettings"));
             return services;
 
